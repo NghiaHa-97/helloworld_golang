@@ -1,0 +1,55 @@
+Setting
+
+Start zookeeper and kafka
+D:\User\kafka_2.13-2.8.0>zookeeper-server-start.bat config\zookeeper.properties
+
+D:\User\kafka_2.13-2.8.0>kafka-server-start.bat config\server.properties
+
+
+* kafka-topics: nhận hướng dẫn về topic 
+
+// tạo topic: chỉ đinh zookeeper , tên topic, phân vùng, nhân rộng (nhân rộng không được quá số lượng broker) (VD: 1 brocker thì không thể nhân rộng 2 đc)
+
+kafka-topics --zookeeper localhost:2181 --topic first_topic --create --partitions 3 --replication-factor 1
+
+//danh sach topic
+kafka-topics --zookeeper localhost:2181  --list
+
+##thong tin (describe) ve topic
+kafka-topics --zookeeper localhost:2181  --topic first_topic --describe
+
+//tao message to topic
+kafka-console-producer --broker-list localhost:9092 --topic first_topic
+
+// change property 
+kafka-console-producer --broker-list localhost:9092 --topic first_topic --producer-property ack
+s=all
+
+//change file config
+nano config/server.properties 
+
+// kafka consumer
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic
+// doc tu dau 
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic --from-beginning
+
+//create group consumer
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic --group group_first_topic
+
+-- khi tạo consumer thì nó sẽ subscibe từ vị trí offset đc tạo,,  dùng from-beginning  cchir sử dụng đc vớI khi chưa có group nào
+
+// document change group
+kafka-consumer-groups 
+
+//view list group consumer
+
+kafka-consumer-groups --bootstrap-server localhost:9092 --list
+
+// view detail of group
+
+kafka-consumer-groups --bootstrap-server localhost:9092 --describe --group group_firs
+
+
+
+//reset lai offset tu dau
+kafka-consumer-groups --bootstrap-server localhost:9092 --reset-offsets --to-earliest --execute --group first_group --topic first_topic
