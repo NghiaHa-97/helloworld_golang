@@ -10,16 +10,26 @@ import (
 )
 
 // the topic and broker address are initialized as constants
+
+//run zookeeper:zookeeper-server-start.bat config\zookeeper.properties
+//run 3 broker:kafka-server-start.bat config\server.properties
+//run 3 broker:kafka-server-start.bat config\server1.properties
+//run 3 broker:kafka-server-start.bat config\server2.properties
+
 const (
-	topic          = "message-log"
-	broker1Address = "127.0.0.1:9092"
-	broker2Address = "127.0.0.1:9093"
+	topic          = "replication_topic"
+	broker2Address = "127.0.0.1:9092"
+	broker1Address = "127.0.0.1:9093"
 	broker3Address = "127.0.0.1:9094"
 )
 
 func main() {
 	ctx := context.Background()
+
+	// conn, _ := kafka.DialLeader(ctx, "tcp", "localhost:9092", topic, 0)
+
 	go produce(ctx)
+	// time.Sleep(10 * time.Second)
 	consume(ctx)
 }
 
@@ -29,9 +39,9 @@ func produce(ctx context.Context) {
 
 	// init broker and topic
 	w := kafka.NewWriter(kafka.WriterConfig{
-		Brokers: []string{broker1Address, broker2Address, broker3Address},
-
-		Topic: topic,
+		Brokers:      []string{broker1Address, broker2Address, broker3Address},
+		RequiredAcks: -1,
+		Topic:        topic,
 		//set defaunt partitions in file server.properties num.partitions=3
 	})
 
@@ -49,7 +59,8 @@ func produce(ctx context.Context) {
 		fmt.Println("writes:", i)
 		i++
 		//sleep 1s
-		time.Sleep(time.Second)
+		time.Sleep(3 * time.Second)
+
 	}
 }
 
@@ -57,10 +68,12 @@ func consume(ctx context.Context) {
 
 	//read topic
 	r := kafka.NewReader(kafka.ReaderConfig{
-		Brokers: []string{broker1Address, broker2Address, broker3Address},
-		Topic:   topic,
-		GroupID: "my-group",
+		Brokers:     []string{broker1Address, broker2Address, broker3Address},
+		Topic:       topic,
+		GroupID:     "my-group",
+		StartOffset: kafka.FirstOffset,
 	})
+	r.SetOffset(13)
 	for {
 
 		msg, err := r.ReadMessage(ctx)
