@@ -3,6 +3,8 @@ package main
 import (
 	"context"
 	"fmt"
+	"log"
+	"os"
 	"strconv"
 	"time"
 
@@ -34,14 +36,15 @@ func main() {
 }
 
 func produce(ctx context.Context) {
-
+	logger := log.New(os.Stdout, "kafka Writer: ", 0)
 	i := 0
 
-	// init broker and topic
+	// send to broker
 	w := kafka.NewWriter(kafka.WriterConfig{
 		Brokers:      []string{broker1Address, broker2Address, broker3Address},
-		RequiredAcks: -1,
+		RequiredAcks: 0,
 		Topic:        topic,
+		Logger:       logger,
 		//set defaunt partitions in file server.properties num.partitions=3
 	})
 
@@ -53,32 +56,37 @@ func produce(ctx context.Context) {
 			Value: []byte(" message" + strconv.Itoa(i)),
 		})
 		if err != nil {
-			panic("could not write" + err.Error())
+			// panic("could not write" + err.Error())
+			fmt.Println("could not write" + err.Error())
 		}
 
 		fmt.Println("writes:", i)
 		i++
 		//sleep 1s
-		time.Sleep(3 * time.Second)
+		time.Sleep(1 * time.Second)
 
 	}
 }
 
 func consume(ctx context.Context) {
-
+	logger := log.New(os.Stdout, "kafka Reader: ", 0)
 	//read topic
 	r := kafka.NewReader(kafka.ReaderConfig{
-		Brokers:     []string{broker1Address, broker2Address, broker3Address},
-		Topic:       topic,
-		GroupID:     "my-group",
-		StartOffset: kafka.FirstOffset,
+		Brokers:  []string{broker1Address, broker2Address, broker3Address},
+		Topic:    topic,
+		GroupID:  "my-group",
+		MinBytes: 5,
+		// the kafka library requires you to set the MaxBytes
+		// in case the MinBytes are set
+		MaxBytes: 1e6,
+		Logger:   logger,
 	})
-	r.SetOffset(13)
+	// r.SetOffset(13)
 	for {
 
 		msg, err := r.ReadMessage(ctx)
 		if err != nil {
-			panic("could not read message " + err.Error())
+			fmt.Println("could not read message " + err.Error())
 		}
 
 		fmt.Println("received: ", string(msg.Value))
