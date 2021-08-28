@@ -1,5 +1,5 @@
-module github.com/sohamkamani/golang-kafka-example
+module kafka
 
-go 1.14
+go 1.17
 
-require github.com/segmentio/kafka-go v0.4.2
+require github.com/confluentinc/confluent-kafka-go v1.7.0

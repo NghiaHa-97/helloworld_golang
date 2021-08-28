@@ -8,17 +8,14 @@ import (
 	"strconv"
 )
 
-type customWriter struct{
+type customWriter struct {
 	body string
 }
 
-
 func main() {
 
-
-
 	res, err := http.Get("http://google.com")
-	
+
 	if err != nil {
 		fmt.Println("Error:", err)
 		os.Exit(1)
@@ -30,20 +27,14 @@ func main() {
 	// fmt.Println(string(body))
 	// fmt.Println(item)
 
-
 	//methot2
 	// io.Copy(os.Stdout,res.Body)
 
-	
-
 	//method3: custom writer struct
 	cus := customWriter{}
-	numberElement , _ := io.Copy(&cus,res.Body)
+	numberElement, _ := io.Copy(&cus, res.Body)
 	fmt.Printf(strconv.Itoa(int(numberElement)))
 	fmt.Println(cus.body)
-	
-
-
 
 	// byteBody := resp.Body
 
@@ -52,7 +43,7 @@ func main() {
 
 	//return &[]
 	// newTest:= new([]byte)
-	
+
 	// fmt.Println(testMake)
 
 	// lw := logWriter{}
@@ -60,46 +51,12 @@ func main() {
 	// io.Copy(lw, resp.Body)
 }
 
-
 //custom writer
-func (cw *customWriter) Write(p []byte) (int,  error){
+func (cw *customWriter) Write(p []byte) (int, error) {
 	// fmt.Printf(string(p))
-	cw.body=string(p)
-	return 1 , nil
+	cw.body = string(p)
+	return 1, nil
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // func (logWriter) Write(bs []byte) (int, error) {
 // 	fmt.Println(string(bs))

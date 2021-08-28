@@ -14,13 +14,13 @@ func main() {
 		firstName: "LL",
 		lastName:  "00",
 	}
-	(&personA).changePerson();
+	(&personA).changePerson()
 	fmt.Println(personA)
 
 	// fmt.Println(personA)
 
 }
 
-func (p *person )changePerson( )  {
-	p.firstName="LLLL";
+func (p *person) changePerson() {
+	p.firstName = "LLLL"
 }
