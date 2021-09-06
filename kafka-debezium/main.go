@@ -45,7 +45,7 @@ func ReadTopicMessages(consumer *kafka.Consumer) string {
 			fmt.Println(string(jsonFormat))
 			//message = message + string(msg.Value)
 		} else {
-			// The client will automatically try to recover from all errors.
+
 			fmt.Printf("Consumer error: %v (%v)\n", err, msg)
 		}
 	}
@@ -90,8 +90,6 @@ func CheckConnector() {
 		fmt.Println("register connect" )
 		RegisterConnector()
 	}
-
-	// If you want to show response, uncomment following lines
 
 	//body, _ := ioutil.ReadAll(response.Body)
 

@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a6507bdc-f6ca-49b3-a07d-2a4f2068fc19" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kafka-debezium/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/kafka-debezium/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kafka-debezium/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/kafka-debezium/main.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,7 +134,7 @@
       <workItem from="1630830276252" duration="8723000" />
       <workItem from="1630847491445" duration="7993000" />
       <workItem from="1630856737240" duration="270000" />
-      <workItem from="1630887564224" duration="5099000" />
+      <workItem from="1630887564224" duration="5485000" />
     </task>
     <servers />
   </component>
