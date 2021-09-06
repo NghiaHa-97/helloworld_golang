@@ -10,10 +10,9 @@ import (
 )
 
 func CreateKafkaConsumer() *kafka.Consumer {
-
 	consumer, err := kafka.NewConsumer(&kafka.ConfigMap{
 		"bootstrap.servers": "localhost:9092,localhost:9093,localhost:9094",
-		"group.id":          "myGroup1",
+		"group.id":          "myGroup11",
 		"auto.offset.reset": "earliest",
 		"go.events.channel.enable": true,
 	})
@@ -21,7 +20,6 @@ func CreateKafkaConsumer() *kafka.Consumer {
 	if err != nil {
 		panic(err)
 	}
-
 	return consumer
 }
 
@@ -68,12 +66,9 @@ func RegisterConnector() *http.Response {
 
 	if err != nil{
 		panic(err)
-	}else{
+	}else {
 		fmt.Println("success")
 	}
-
-
-
 	return response
 }
 
