@@ -292,7 +292,7 @@ docker exec -it postgres bash
 ```md
 psql -h localhost -p 5432 -U postgres
 ```
--- tạo schema và table và thực hiện insert
+- tạo schema và table và thực hiện insert
 ```md
 CREATE SCHEMA debezium;
 ```
