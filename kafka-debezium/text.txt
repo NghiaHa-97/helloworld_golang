@@ -1,0 +1,50 @@
+{
+  "name": "product_connector",
+  "config": {
+    "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+    "tasks.max": "1",
+    "database.hostname": "postgres",
+    "database.port": "5432",
+    "database.user": "postgres",
+    "database.password": "postgres",
+    "database.dbname": "DebeziumTest",
+    "database.server.name": "postgres",
+    "slot.name": "product_slot",
+    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+    "key.converter.schemas.enable": "false",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "value.converter.schemas.enable": "false",
+    "include.schema.changes": "false",
+    "topic": "my-topic",
+    "topic.creation.default.replication.factor": 3,
+    "topic.creation.default.partitions": 3,
+    "topic.creation.default.cleanup.policy": "compact",
+    "topic.creation.default.compression.type": "lz4"
+  }
+}
+
+
+
+
+{
+  "name": "product_connector",
+  "config": {
+    "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+    "tasks.max": 1,
+    "database.hostname": "postgres",
+    "database.port": "5432",
+    "database.user": "postgres",
+    "database.password": "postgres",
+    "database.dbname" : "postgres",
+    "database.server.name": "postgres",
+
+    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+    "key.converter.schemas.enable": "false",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "value.converter.schemas.enable": "false",
+
+    "topic.creation.default.replication.factor": 1,
+    "topic.creation.default.partitions": 3
+  }
+}
+

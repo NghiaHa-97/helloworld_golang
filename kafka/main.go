@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/confluentinc/confluent-kafka-go/kafka"
 	"log"
+	"time"
 )
 
 // the topic and broker address are initialized as constants
@@ -89,19 +90,25 @@ func produce() {
 
 	// Produce messages to topic (asynchronously)
 	topic := "myTopic"
-	for _, word := range []string{"1", "2", "3", "4", "5", "6", "7"} {
+	//for _, word := range []string{"1", "2", "3", "4", "5", "6", "7"} {
+	word:=0
+	for  {
+
 		error := p.Produce(&kafka.Message{
 			TopicPartition: kafka.TopicPartition{Topic: &topic, Partition: kafka.PartitionAny},
-			Value:          []byte(word),
+			Value:          []byte(fmt.Sprint(word)),
 		}, nil)
+		word++
+
 		if error!=nil{
 			log.Println("ERROR send message: ", error)
 
 		}
+		time.Sleep(8*60*time.Second)
 	}
 
 	// Wait for message deliveries before shutting down
-	p.Flush(15 * 1000)
+	//p.Flush(15 * 1000)
 }
 
 func consume() {
@@ -136,6 +143,7 @@ func consume() {
 		"auto.offset.reset":        "earliest",
 		"go.events.channel.enable": true,
 		"enable.auto.commit":       false,
+
 	})
 
 	if err != nil {
@@ -147,9 +155,14 @@ func consume() {
 
 	for {
 		//TODO: ReadMessage
-		/*
 
-		msg, err := c.ReadMessage(5*time.Second)
+
+		//Trong producer mình có đặt time.Sleep(20*time.Second) sau 20s thì phát message
+		//Còn trong consumer mì để timeout là 5s  c.ReadMessage(5*time.Second)
+		//thì khi trong khoảng thời gian 5s mà hkoong có mesage nào đc gueri đến kafka thì consummer sẽ trả về null
+		//trong khoảng thời gina đó mà có thì nó sẽ trả về mesage
+
+		msg, err := c.ReadMessage(-1)
 		if err == nil {
 			fmt.Printf("Message on %s: %s\n", msg.TopicPartition, string(msg.Value))
 		} else {
@@ -157,12 +170,12 @@ func consume() {
 			fmt.Printf("Consumer error: %v (%v)\n", err, msg)
 		}
 
-		*/
 
 
-		ev := c.Events()
 
-		fmt.Println("Message on ", <-ev)
+		ev := <-c.Events()
+
+		fmt.Println("Message on ", ev)
 
 	}
 

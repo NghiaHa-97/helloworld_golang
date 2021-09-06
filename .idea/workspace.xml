@@ -5,16 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a6507bdc-f6ca-49b3-a07d-2a4f2068fc19" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Code.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/channels_and_routines/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/debezium/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/debezium/register-postgres.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kafka-debezium/debezium_connect.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kafka-debezium/doc.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kafka-debezium/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kafka-debezium/go.mod" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kafka-debezium/go.sum" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kafka-debezium/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kafka-debezium/text.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kafka/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/kafka/main.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
   </component>
   <component name="GOROOT" url="file://C:/Go" />
   <component name="Git.Settings">
@@ -34,9 +48,9 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="DefaultGoTemplateProperty" value="Go File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="configurable..is.expanded" value="true" />
@@ -46,12 +60,17 @@
     <property name="go.modules.go.list.on.any.changes.was.set" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/kafka-debezium" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="go.sdk" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\1WEB\golang-kafka\GoTheCompleteDeveloperGuideGolang\Code\kafka-debezium" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="go build main.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
@@ -106,7 +125,26 @@
       <workItem from="1630077174242" duration="317000" />
       <workItem from="1630077512392" duration="198000" />
       <workItem from="1630077868285" duration="364000" />
-      <workItem from="1630114632235" duration="6283000" />
+      <workItem from="1630114632235" duration="13175000" />
+      <workItem from="1630138985478" duration="101000" />
+      <workItem from="1630139114709" duration="12000" />
+      <workItem from="1630139177349" duration="4971000" />
+      <workItem from="1630232485518" duration="996000" />
+      <workItem from="1630234614227" duration="1099000" />
+      <workItem from="1630484836774" duration="9507000" />
+      <workItem from="1630507241281" duration="1060000" />
+      <workItem from="1630551203979" duration="1357000" />
+      <workItem from="1630646477907" duration="2653000" />
+      <workItem from="1630677588495" duration="1190000" />
+      <workItem from="1630719069169" duration="3543000" />
+      <workItem from="1630735951903" duration="936000" />
+      <workItem from="1630748207984" duration="709000" />
+      <workItem from="1630801051490" duration="7250000" />
+      <workItem from="1630810051011" duration="12006000" />
+      <workItem from="1630830276252" duration="8723000" />
+      <workItem from="1630847491445" duration="7993000" />
+      <workItem from="1630856737240" duration="270000" />
+      <workItem from="1630887564224" duration="4373000" />
     </task>
     <servers />
   </component>

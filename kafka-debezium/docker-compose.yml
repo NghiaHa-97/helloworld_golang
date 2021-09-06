@@ -1,0 +1,253 @@
+#version: '3.7'
+#
+#services:
+#
+#  postgres:
+#    image: debezium/postgres
+#    container_name: postgres
+#    networks:
+#      - kafka-network
+#    environment:
+#      POSTGRES_PASSWORD: postgres
+#      POSTGRES_USER: postgres
+#    ports:
+#      - 5432:5432
+#
+#  zookeeper:
+#    image: confluentinc/cp-zookeeper:latest
+#    container_name: zookeeper
+#    networks:
+#      - kafka-network
+#    ports:
+#      - 2181:2181
+#    environment:
+#      ZOOKEEPER_CLIENT_PORT: 2181
+#      ZOOKEEPER_TICK_TIME: 2000
+#
+#  kafka-1:
+#    image: confluentinc/cp-kafka:latest
+#    container_name: kafka-1
+#    networks:
+#      - kafka-network
+#    depends_on:
+#      - zookeeper
+#    ports:
+#      - 9092:9092
+#    environment:
+#      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+#      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-1:29092,PLAINTEXT_HOST://localhost:9092
+#      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+#      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+##      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+#      KAFKA_DEFAULT_REPLICATION_FACTOR: 3
+#      KAFKA_LOG_CLEANER_DELETE_RETENTION_MS: 5000
+#      KAFKA_BROKER_ID: 1
+#      #số lượng bản sao phản hồi lại
+##      KAFKA_MIN_INSYNC_REPLICAS: 2
+#
+#  kafka-2:
+#    image: confluentinc/cp-kafka:latest
+#    container_name: kafka-2
+#    networks:
+#      - kafka-network
+#    depends_on:
+#      - zookeeper
+#    ports:
+#      - 9093:9093
+#    environment:
+#      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+#      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-2:29093,PLAINTEXT_HOST://localhost:9093
+#      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+#      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+##      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+#      KAFKA_DEFAULT_REPLICATION_FACTOR: 3
+#      KAFKA_LOG_CLEANER_DELETE_RETENTION_MS: 5000
+#      KAFKA_BROKER_ID: 2
+#      #số lượng bản sao phản hồi lại
+##      KAFKA_MIN_INSYNC_REPLICAS: 2
+#
+#  kafka-3:
+#    image: confluentinc/cp-kafka:latest
+#    container_name: kafka-3
+#    networks:
+#      - kafka-network
+#    depends_on:
+#      - zookeeper
+#    ports:
+#      - 9094:9094
+#    environment:
+#      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+#      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-3:29094,PLAINTEXT_HOST://localhost:9094
+#      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+#      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+##      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+#      KAFKA_DEFAULT_REPLICATION_FACTOR: 3
+#      KAFKA_LOG_CLEANER_DELETE_RETENTION_MS: 5000
+#      KAFKA_BROKER_ID: 3
+#      #số lượng bản sao phản hồi lại
+##      KAFKA_MIN_INSYNC_REPLICAS: 2
+#
+#
+#  connector:
+#    image: debezium/connect:latest
+#    container_name: kafka_connect_with_debezium
+#    networks:
+#      - kafka-network
+#    ports:
+#      - "8083:8083"
+#    environment:
+#      GROUP_ID: 1
+#      CONFIG_STORAGE_TOPIC: my_connect_configs
+#      OFFSET_STORAGE_TOPIC: my_connect_offsets
+#      BOOTSTRAP_SERVERS: localhost:9092
+#    depends_on:
+#      - zookeeper
+#      - kafka-1
+#
+#networks:
+#  kafka-network:
+#    driver: bridge
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+version: '3.7'
+
+services:
+
+  postgres:
+    image: debezium/postgres:latest
+    container_name: postgres
+    networks:
+      - kafka-network
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+    ports:
+      - 5432:5432
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+#    image: debezium/zookeeper:latest
+    container_name: zookeeper
+    networks:
+      - kafka-network
+    ports:
+      - 2181:2181
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+
+  kafka-1:
+    image: confluentinc/cp-kafka:latest
+#    image: debezium/kafka:latest
+    container_name: kafka-1
+    networks:
+      - kafka-network
+    depends_on:
+      - zookeeper
+    ports:
+      - 9092:9092
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-1:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
+#      KAFKA_LOG_CLEANER_DELETE_RETENTION_MS: 5000
+      KAFKA_BROKER_ID: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+      KAFKA_NUM_PARTITIONS: 3
+      KAFKA_DEFAULT_REPLICATION_FACTOR: 3
+  #      KAFKA_MIN_INSYNC_REPLICAS: 1
+
+  kafka-2:
+    image: confluentinc/cp-kafka:latest
+    #    image: debezium/kafka:latest
+    container_name: kafka-2
+    networks:
+      - kafka-network
+    depends_on:
+      - zookeeper
+    ports:
+      - 9093:9093
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-2:29093,PLAINTEXT_HOST://localhost:9093
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
+      #      KAFKA_LOG_CLEANER_DELETE_RETENTION_MS: 5000
+      KAFKA_BROKER_ID: 2
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+      KAFKA_NUM_PARTITIONS: 3
+      KAFKA_DEFAULT_REPLICATION_FACTOR: 3
+  #      KAFKA_MIN_INSYNC_REPLICAS: 1
+
+  kafka-3:
+    image: confluentinc/cp-kafka:latest
+    #    image: debezium/kafka:latest
+    container_name: kafka-3
+    networks:
+      - kafka-network
+    depends_on:
+      - zookeeper
+    ports:
+      - 9094:9094
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-3:29094,PLAINTEXT_HOST://localhost:9094
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
+      #      KAFKA_LOG_CLEANER_DELETE_RETENTION_MS: 5000
+      KAFKA_BROKER_ID: 3
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+      KAFKA_NUM_PARTITIONS: 3
+      KAFKA_DEFAULT_REPLICATION_FACTOR: 3
+  #      KAFKA_MIN_INSYNC_REPLICAS: 1
+
+  connector:
+    image: debezium/connect:latest
+    container_name: kafka_connect_with_debezium
+    networks:
+      - kafka-network
+    ports:
+      - "8083:8083"
+    environment:
+      GROUP_ID: 1
+      CONFIG_STORAGE_TOPIC: my_connect_configs
+      OFFSET_STORAGE_TOPIC: my_connect_offsets
+      STATUS_STORAGE_TOPIC: my_connect_statuses
+      BOOTSTRAP_SERVERS: kafka-1:29092
+    depends_on:
+      - kafka-1
+      - kafka-2
+      - kafka-3
+      - postgres
+networks:
+  kafka-network:
+    driver: bridge
+
+
+
+
+
+
