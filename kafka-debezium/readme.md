@@ -1,7 +1,8 @@
 # Kafka cluster and Debezium, postgers using golang, docker-compose
 
 
-Mô hình kết nối các container:![](./images/diagram.PNG)
+## Mô hình kết nối các container:
+![](./images/diagram.PNG)
 
 ## 1: Tạo container postgres từ ``` debezium/postgres:latest```
 ### environment:
